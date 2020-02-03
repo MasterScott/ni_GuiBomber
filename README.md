@@ -1,3 +1,7 @@
+![Image alt]
+(https://github.com/Nikait/ni_GuiBomber/raw/build/Screenshot_2.png) 
+
+
 Это десктоп версия бомбера https://github.com/Nikait/ni_bomber 
 Сделано под windows на python tkinter
 Итак, план:
