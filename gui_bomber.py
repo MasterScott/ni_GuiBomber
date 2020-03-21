@@ -25,7 +25,7 @@ def bomber(event):
     def check_number(number):
         try:
             int(len(number)) == 10
-            int(number[1]) == 9 or 8
+            int(number[0]) == 9 or 8
             check = Label(root, text = "check number - OK")
             check.place(x = 300, y = 100)
         except:
