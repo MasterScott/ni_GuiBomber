@@ -1,6 +1,8 @@
 Это desktop версия бомбера https://github.com/Nikait/ni_bomber 
 Сделано под Windows и Linux на python tkinter
 
+![alt text](bomber.png)
+
 #  Установка
 ## Windows
 Если у вас Windows 7 x86 или x64 то скачивайте уже готовый gui_bomber.exe
