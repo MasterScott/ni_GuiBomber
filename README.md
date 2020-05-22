@@ -19,5 +19,9 @@
 3) устанавливаете все зависимости для python 3.6 и более
 4) python3 gui_bomber.py
 
-donate на чашку кофе:
-bitcoin: 18LKUKWAUBAFKzLBdFFkt687vh8rMPhL1u
+донаты на чашку кофе:
+
+    monero: 
+    48TmwHGVsqSKgD7giTALoK7P2muKLTJn5R8s5XtKZL1jEr4MJFBAwczVtofuFGvzsT1CzTcFXotwZCDno1UsskqFFZe9wVC
+    bitcoin:
+    18LKUKWAUBAFKzLBdFFkt687vh8rMPhL1u
